@@ -1,9 +1,15 @@
 <div>
-    <form class="box">
+    <form [formGroup]="loginForm" class="box" (ngSubmit)="onClick()">
         <h1>Authentification</h1>
-        <input type="text" name="" placeholder="Login">
-        <input type="password" name="" placeholder="Password">
-        <input type="submit" name="" value="Envoie">
+        <input type="text"  placeholder="Login" formControlName="login">
+        <div *ngIf="f.login.errors && (f.login.touched || f.login.dirty)">
+            Un Login est obligatoire ! 
+        </div>
+        <input type="password"  placeholder="Password" formControlName="mdp">
+        <div *ngIf="f.mdp.invalid && (f.mdp.touched || f.mdp.dirty)">
+            Un Password de plus de 5 charactères est obligatoire ! 
+        </div>
+        <input type="submit"   [disabled]="!loginForm.valid" >
 
 
     </form>
